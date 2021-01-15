@@ -1,0 +1,6 @@
+[run]
+omit=tests/*, starlette_request_id/version.py
+
+[report]
+exclude_lines =
+    if __name__ == .__main__.:
