@@ -7,18 +7,11 @@ from starlette.requests import Request
 from starlette.responses import Response
 from starlette.types import ASGIApp
 
-from . import constants, context
+from . import constants, helper
 
 
 def _get_default_id() -> str:
     return str(uuid.uuid4())
-
-
-class RequestIdCtx(context.ContextStorage):
-    CONTEXT_KEY_NAME = "request_id"
-
-
-request_id_ctx = RequestIdCtx()
 
 
 @dataclass
@@ -34,7 +27,7 @@ class RequestIdMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next: RequestResponseEndpoint) -> Response:
         request_id = request.headers.get(self.id_header, self.get_default_id_func())
 
-        request_id_ctx.set(request_id)
+        helper.request_id_ctx.set(request_id)
         response = await call_next(request)
         response.headers[self.id_header] = request_id
         return response

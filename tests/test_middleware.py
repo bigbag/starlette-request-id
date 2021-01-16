@@ -1,6 +1,6 @@
 from uuid import UUID
-from starlette_request_id.constants import REQUEST_ID_HEADER
-from starlette_request_id.middleware import request_id_ctx
+
+from starlette_request_id import REQUEST_ID_HEADER
 
 
 def test_if_request_id_in_header(client):
@@ -18,8 +18,3 @@ def test_if_request_id_not_in_header(client):
 
     assert REQUEST_ID_HEADER in response.headers
     assert UUID(response.headers[REQUEST_ID_HEADER])
-
-
-def test_request_id_ctx():
-    assert request_id_ctx.set("TEST") is None
-    assert request_id_ctx.get() == "TEST"
