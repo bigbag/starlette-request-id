@@ -30,7 +30,7 @@ setup(
     name="starlette-request-id",
     version=str(version.VERSION),
     license="Apache License, Version 2.0",
-    description="Localisation helper for starlette",
+    description="Helper for starlette to add request id in logger",
     long_description=readme,
     long_description_content_type="text/x-rst",
     author="Pavel Liashkov",
