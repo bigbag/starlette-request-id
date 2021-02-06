@@ -9,7 +9,7 @@ version = SourceFileLoader("version", "starlette_request_id/version.py").load_mo
 
 _ROOT = pathlib.Path(__file__).parent
 
-with open(str(_ROOT / "README.rst")) as f:
+with open(str(_ROOT / "README.md")) as f:
     readme = f.read()
 
 CLASSIFIERS = [
@@ -19,7 +19,6 @@ CLASSIFIERS = [
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Operating System :: POSIX",
-    "Topic :: System :: Networking",
     "Topic :: Software Development",
     "Topic :: Software Development :: Libraries",
     "Environment :: Console",
@@ -32,7 +31,7 @@ setup(
     license="Apache License, Version 2.0",
     description="Helper for starlette to add request id in logger",
     long_description=readme,
-    long_description_content_type="text/x-rst",
+    long_description_content_type="text/markdown",
     author="Pavel Liashkov",
     author_email="pavel.liashkov@protonmail.com",
     maintainer="Pavel Liashkov",
