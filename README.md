@@ -84,7 +84,7 @@ curl 127.0.0.1:8000
 ```
 ## License
 
-sqlalchemy-state-machine is developed and distributed under the Apache 2.0 license.
+starlette-request-id is developed and distributed under the Apache 2.0 license.
 
 ## Reporting a Security Vulnerability
 
