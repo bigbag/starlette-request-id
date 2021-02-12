@@ -19,10 +19,11 @@ Use pip to install:
 ## Basic Usage
 
 ```py
+import httpx
 import uvicorn
 from starlette.applications import Starlette
 from starlette.responses import PlainTextResponse
-from starlette_request_id import RequestIdMiddleware, init_logger
+from starlette_request_id import REQUEST_ID_HEADER, RequestIdMiddleware, init_logger, request_id_ctx
 
 LOGGING = {
     "version": 1,
@@ -58,6 +59,7 @@ def init_app():
 
     @app_.route("/")
     def success(request):
+        httpx.post("https://www.example.org/", headers={REQUEST_ID_HEADER: request_id_ctx.get()})
         return PlainTextResponse("OK", status_code=200)
 
     return app_
@@ -69,7 +71,8 @@ if __name__ == "__main__":
     uvicorn.run(
         app=app,
         log_config=LOGGING,
-        )
+    )
+
 ```
 
 curl 127.0.0.1:8000
