@@ -1,6 +1,7 @@
 # starlette-request-id
 
 [![CI](https://github.com/bigbag/starlette-request-id/workflows/CI/badge.svg)](https://github.com/bigbag/starlette-request-id/actions?query=workflow%3ACI)
+[![codecov](https://codecov.io/gh/bigbag/starlette-request-id/branch/main/graph/badge.svg?token=ZRUN7SUKB2)](https://codecov.io/gh/bigbag/starlette-request-id)
 [![pypi](https://img.shields.io/pypi/v/starlette-request-id.svg)](https://pypi.python.org/pypi/starlette-request-id)
 [![downloads](https://img.shields.io/pypi/dm/starlette-request-id.svg)](https://pypistats.org/packages/starlette-request-id)
 [![versions](https://img.shields.io/pypi/pyversions/starlette-request-id.svg)](https://github.com/bigbag/starlette-request-id)
