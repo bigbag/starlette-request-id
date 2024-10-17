@@ -1,5 +1,10 @@
 
 
+## 1.0.0 (2024-10-17)
+
+*  Update Makefile, add changelog [Pavel Liashkov]
+
+
 ## 0.8.0 (2024-10-17)
 
 *  Add support for python 3.12 and 3.13 (#10) [Pavel Liashkov]
