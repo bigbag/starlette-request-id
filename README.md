@@ -10,6 +10,8 @@
 
 **starlette-request-id** is a helper for starlette to add request id in logger.
 
+* [Project Changelog](CHANGELOG.md)
+
 ## Installation
 
 starlette-request-id is available on PyPI.

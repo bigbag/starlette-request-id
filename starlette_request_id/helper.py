@@ -1,8 +1,3 @@
-from . import context
-
-
-class RequestIdCtx(context.ContextStorage):
-    CONTEXT_KEY_NAME = "request_id"
-
+from request_id_helper import RequestIdCtx
 
 request_id_ctx = RequestIdCtx()
