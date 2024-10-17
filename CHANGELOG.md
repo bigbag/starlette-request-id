@@ -3,6 +3,8 @@
 ## 1.0.0 (2024-10-17)
 
 *  Update Makefile, add changelog [Pavel Liashkov]
+*  Update changelog [Pavel Liashkov]
+*  Update version [Pavel Liashkov]
 
 
 ## 0.8.0 (2024-10-17)
