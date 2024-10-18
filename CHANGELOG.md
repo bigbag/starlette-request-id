@@ -4,6 +4,8 @@
 
 *  Update changelog [Pavel Liashkov]
 *  Move logger helper in request-id-helper [Pavel Liashkov]
+*  Update changelog [Pavel Liashkov]
+*  Update version [Pavel Liashkov]
 
 
 ## 1.0.0 (2024-10-17)
