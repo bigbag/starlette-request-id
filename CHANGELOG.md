@@ -1,5 +1,11 @@
 
 
+## 1.1.0 (2024-10-17)
+
+*  Update changelog [Pavel Liashkov]
+*  Move logger helper in request-id-helper [Pavel Liashkov]
+
+
 ## 1.0.0 (2024-10-17)
 
 *  Update Makefile, add changelog [Pavel Liashkov]
