@@ -1,5 +1,11 @@
 
 
+## 1.1.1 (2024-10-18)
+
+*  Update changelog [Pavel Liashkov]
+*  Fix url in README [Pavel Liashkov]
+
+
 ## 1.1.0 (2024-10-17)
 
 *  Update changelog [Pavel Liashkov]
