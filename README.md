@@ -10,7 +10,7 @@
 
 **starlette-request-id** is a helper for starlette to add request id in logger.
 
-* [Project Changelog](CHANGELOG.md)
+* [Project Changelog](https://github.com/bigbag/starlette-request-id/blob/main/CHANGELOG.md)
 
 ## Installation
 
