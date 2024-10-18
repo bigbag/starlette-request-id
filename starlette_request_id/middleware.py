@@ -7,7 +7,7 @@ from starlette.requests import Request
 from starlette.responses import Response
 from starlette.types import ASGIApp
 
-from . import constants, helper
+from . import constants, request_id_ctx
 
 
 def _get_default_id() -> str:
@@ -26,8 +26,7 @@ class RequestIdMiddleware(BaseHTTPMiddleware):
 
     async def dispatch(self, request: Request, call_next: RequestResponseEndpoint) -> Response:
         request_id = request.headers.get(self.id_header, self.get_default_id_func())
-
-        helper.request_id_ctx.set(request_id)
+        request_id_ctx.set(request_id)
         response = await call_next(request)
         response.headers[self.id_header] = request_id
         return response

@@ -1,7 +1,6 @@
-from request_id_helper import LogExtraFactory, init_logger
+from request_id_helper import LogExtraFactory, init_logger, request_id_ctx
 
 from .constants import REQUEST_ID_HEADER
-from .helper import request_id_ctx
 from .middleware import RequestIdMiddleware
 
 __all__ = [
