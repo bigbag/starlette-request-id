@@ -1,5 +1,16 @@
 
 
+## 1.2.1 (2024-10-18)
+
+*  Add gunicorn and uvicorn examples [Pavel Liashkov]
+
+
+## 1.2.0 (2024-10-18)
+
+*  Update changelog [Pavel Liashkov]
+*  Fix bug with two different contexts [Pavel Liashkov]
+
+
 ## 1.1.1 (2024-10-18)
 
 *  Update changelog [Pavel Liashkov]
