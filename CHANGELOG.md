@@ -1,4 +1,12 @@
 
+# Changelog
+
+## 2.0.0 (2026-07-20)
+
+* Modernize packaging, tooling, and CI for Python 3.11–3.14.
+* Replace `BaseHTTPMiddleware` with context-safe pure ASGI middleware.
+* Preserve the public request-ID and request-id-helper logging APIs.
+* Require Starlette >1.2.0 and <2.0.0.
 
 ## 1.2.1 (2024-10-18)
 
