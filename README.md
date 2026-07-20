@@ -1,99 +1,113 @@
 # starlette-request-id
 
-[![CI](https://github.com/bigbag/starlette-request-id/workflows/CI/badge.svg)](https://github.com/bigbag/starlette-request-id/actions?query=workflow%3ACI)
-[![codecov](https://codecov.io/gh/bigbag/starlette-request-id/branch/main/graph/badge.svg?token=ZRUN7SUKB2)](https://codecov.io/gh/bigbag/starlette-request-id)
-[![pypi](https://img.shields.io/pypi/v/starlette-request-id.svg)](https://pypi.python.org/pypi/starlette-request-id)
-[![downloads](https://img.shields.io/pypi/dm/starlette-request-id.svg)](https://pypistats.org/packages/starlette-request-id)
-[![versions](https://img.shields.io/pypi/pyversions/starlette-request-id.svg)](https://github.com/bigbag/starlette-request-id)
-[![license](https://img.shields.io/github/license/bigbag/starlette-request-id.svg)](https://github.com/bigbag/starlette-request-id/blob/master/LICENSE)
+Request-ID context and response propagation middleware for Starlette applications.
 
+## Requirements
 
-**starlette-request-id** is a helper for starlette to add request id in logger.
+- Python 3.11+ (CI validates 3.11, 3.12, 3.13, and 3.14)
+- Starlette >1.2.0 and <2.0.0
 
-* [Project Changelog](https://github.com/bigbag/starlette-request-id/blob/main/CHANGELOG.md)
-* [Examples](https://github.com/bigbag/starlette-request-id/blob/main/examples/)
+## Install
 
+```console
+uv add starlette-request-id
+pip install starlette-request-id
+```
 
-## Installation
+## Basic usage
 
-starlette-request-id is available on PyPI.
-Use pip to install:
-
-    $ pip install starlette-request-id
-
-## Basic Usage
-
-```py
-import httpx
-import uvicorn
+```python
 from starlette.applications import Starlette
-from starlette.responses import PlainTextResponse
-from starlette_request_id import REQUEST_ID_HEADER, RequestIdMiddleware, init_logger, request_id_ctx
 
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": 0,
-    "formatters": {
-        "default": {
-            "format": "[%(asctime)s] %(levelname)s [%(request_id)s] %(name)s | %(message)s",
-            "datefmt": "%d/%b/%Y %H:%M:%S",
-        }
-    },
-    "handlers": {
-        "stdout": {
-            "level": "INFO",
-            "class": "logging.StreamHandler",
-            "formatter": "default",
-        },
-    },
-    "loggers": {
-        "": {
-            "handlers": ["stdout"],
-            "propagate": True,
-            "level": "INFO",
-        },
-    },
-}
+from starlette_request_id import RequestIdMiddleware
 
-
-def init_app():
-    init_logger(LOGGING)
-
-    app_ = Starlette()
-    app_.add_middleware(RequestIdMiddleware)
-
-    @app_.route("/")
-    def success(request):
-        httpx.post("https://www.example.org/", headers={REQUEST_ID_HEADER: request_id_ctx.get()})
-        return PlainTextResponse("OK", status_code=200)
-
-    return app_
-
-
-app = init_app()
-
-if __name__ == "__main__":
-    uvicorn.run(
-        app=app,
-        log_config=LOGGING,
-    )
-
+app = Starlette()
+app.add_middleware(RequestIdMiddleware)
 ```
 
-curl 127.0.0.1:8000
+`RequestIdMiddleware` reads `x-request-id`, creates a UUID4 ID if it is absent,
+exposes it through `request_id_ctx`, and writes the active value to the response
+header. See `examples/basic_usage.py` for logging and outbound-header
+propagation.
 
-```bash
-    [17/Jan/2021 18:31:19] INFO [N/A] uvicorn.error | Started server process [576540]
-    [17/Jan/2021 18:31:19] INFO [N/A] uvicorn.error | Waiting for application startup.
-    [17/Jan/2021 18:31:19] INFO [N/A] uvicorn.error | Application startup complete.
-    [17/Jan/2021 18:31:19] INFO [N/A] uvicorn.error | Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
-    [17/Jan/2021 18:31:22] INFO [22395fa2-e296-420e-93a1-5537e1ba0a62] uvicorn.access | 127.0.0.1:50372 - "GET / HTTP/1.1" 200
-    [17/Jan/2021 18:31:25] INFO [9ac6fa25-5048-4222-ac54-dd2c70e3e042] uvicorn.access | 127.0.0.1:50374 - "GET / HTTP/1.1" 200
+## Examples
+
+Run the standalone example:
+
+```console
+uv run --with uvicorn examples/basic_usage.py
 ```
+
+Run the dedicated Uvicorn example:
+
+```console
+uv run --with 'uvicorn[standard]' uvicorn examples.uvicorn_runner:app --reload
+```
+
+Run the Gunicorn example with Uvicorn workers:
+
+```console
+uv run --with gunicorn --with uvicorn gunicorn -c examples/gunicorn_conf.py examples.gunicorn_runner:app
+```
+
+Then send a request with a chosen ID:
+
+```console
+curl -H 'x-request-id: example-id' http://127.0.0.1:8000/
+```
+
+Starlette 1.3 uses `app.add_route(path, endpoint)` to register handlers; the
+examples follow that API.
+
+## Configuration
+
+```python
+app.add_middleware(
+    RequestIdMiddleware,
+    id_header="x-correlation-id",
+    get_default_id_func=lambda: "generated-id",
+)
+```
+
+A supplied value is preserved exactly; the generator is called only when the
+header is absent.
+
+## Logging
+
+```python
+from starlette_request_id import init_logger, request_id_ctx
+```
+
+These exports are the shared APIs from `request-id-helper`, so applications
+that import `request_id_ctx` directly from `request_id_helper` observe the same
+request value.
+
+## Error responses and middleware order
+
+The middleware adds the header to response starts emitted by the application
+and its inner exception handlers. It does not render exceptions. If an outer
+error middleware constructs a response after an exception escapes
+`RequestIdMiddleware`, put that error middleware inside `RequestIdMiddleware`
+or make it write the request-ID header itself.
+
+## Migrating from 1.x
+
+2.0.0 drops Python 3.8–3.10 and replaces the internal `BaseHTTPMiddleware`
+implementation with pure ASGI middleware. Existing imports of
+`RequestIdMiddleware`, `REQUEST_ID_HEADER`, `request_id_ctx`, `init_logger`,
+and `LogExtraFactory` continue to work. Update deployment environments to
+Python 3.11+, use Starlette's `add_route()` API, and retain `request-id-helper`
+as the shared logging/context provider.
+
+## Development
+
+```console
+uv sync --all-groups
+make lint
+make test
+make build
+```
+
 ## License
 
-starlette-request-id is developed and distributed under the Apache 2.0 license.
-
-## Reporting a Security Vulnerability
-
-See our [security policy](https://github.com/bigbag/starlette-request-id/security/policy).
+starlette-request-id is distributed under the Apache License 2.0.
