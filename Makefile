@@ -52,7 +52,7 @@ format: ## Format and auto-fix lint issues
 # =============================================================================
 test: ## Run the test suite with coverage
 	@echo "==> Testing $(PROJECT_NAME) with coverage"
-	$(UV) run --locked pytest --cov=sqlalchemy_state_machine --cov-report=term-missing
+	$(UV) run --locked pytest --cov=starlette_request_id --cov-report=term-missing
 
 build: ## Build distribution packages
 	@echo "==> Building $(PROJECT_NAME) distribution packages"
