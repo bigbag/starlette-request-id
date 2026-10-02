@@ -418,11 +418,11 @@ wheels = [
 
 [[package]]
 name = "request-id-helper"
-version = "1.0.0"
+version = "1.0.1"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/cf/02/bddedd9a88e93367a9dbe7d86e4b9666f7c8e97268d5634d399a7a1794b0/request_id_helper-1.0.0.tar.gz", hash = "sha256:d318584912a991a034fbe8127893adc67405e356ebf476deb12a725ecd0fad7d", size = 52573, upload-time = "2026-07-20T13:39:40.585Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/fc/b8/d487430a827d47df2fd3684408e0f5ee4446005c82ed0fa2f368582a1eb3/request_id_helper-1.0.1.tar.gz", hash = "sha256:3e5e0cf5b1de5a762f2ebbb941247f65f5eee42d85830cd201319e43942a628d", size = 49070, upload-time = "2026-09-27T08:12:02.003Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/1c/78/37d71bcf483a26ded4d61cfe0abb79eaf4e25b1eee72d907d47c13cb73ab/request_id_helper-1.0.0-py3-none-any.whl", hash = "sha256:8505ca5506eab654a2778c5956cd745c13d743d98963e8b7b5a8cfc87bbade7e", size = 8714, upload-time = "2026-07-20T13:39:39.487Z" },
+    { url = "https://files.pythonhosted.org/packages/2c/78/8a1f700cf819c79a4f0b9c64eca3e0222dc2d5cba8db5e8a5c1f398dd580/request_id_helper-1.0.1-py3-none-any.whl", hash = "sha256:2d042e87a97a1c1211cf35f1c547f64c93ee71e3a140ac680ccab312ea0b8366", size = 5368, upload-time = "2026-09-27T08:12:00.955Z" },
 ]
 
 [[package]]
