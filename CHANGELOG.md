@@ -1,6 +1,10 @@
 
 # Changelog
 
+## 2.1.2 (2026-11-15)
+
+* Add Python 3.15 support.
+
 ## 2.1.1 (2026-11-15)
 
 * Set `__version__` to match the package version.
