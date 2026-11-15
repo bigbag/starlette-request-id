@@ -4,7 +4,7 @@ Request-ID context and response propagation middleware for Starlette application
 
 ## Requirements
 
-- Python 3.11+ (CI validates 3.11, 3.12, 3.13, and 3.14)
+- Python 3.11+ (CI validates 3.11, 3.12, 3.13, 3.14, and 3.15)
 - Starlette >1.2.0 and <2.0.0
 
 ## Install
