@@ -1,6 +1,12 @@
 
 # Changelog
 
+## 2.1.1 (2026-11-15)
+
+* Set `__version__` to match the package version.
+* Bump locked dependencies: starlette 1.7.0, request-id-helper 1.0.1, httpx2 2.13.1, ruff 0.16.9, mypy 2.3.1.
+* Bump GitHub Actions: setup-python v6, upload-artifact v6, download-artifact v7, codecov-action v6.
+
 ## 2.0.0 (2026-07-20)
 
 * Modernize packaging, tooling, and CI for Python 3.11–3.14.
